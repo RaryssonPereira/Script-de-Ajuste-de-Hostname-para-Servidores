@@ -1,7 +1,11 @@
 #!/bin/bash
 
+# -----------------------------------------
+# ajuste-hostname.sh
 # Script de ajuste automático de hostname e configurações básicas para servidores
 # Adaptado para uso educacional e genérico (personalize conforme seu provedor)
+# Criado por: Rarysson 💻
+# -----------------------------------------
 
 # Obtém o IP público do servidor
 IP_EXTERNO=$(curl -s http://checkip.amazonaws.com)
