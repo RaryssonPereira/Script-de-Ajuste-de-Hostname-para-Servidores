@@ -1,6 +1,6 @@
 # 🛠️ Script de Ajuste de Hostname com Shell Script
 
-Este projeto contém um script escrito em **Shell Script (Bash)** para realizar configurações iniciais em servidores Linux, como **ajuste automático de hostname**, **geração de senha segura para o root** e **preparação para ferramentas de monitoramento**.
+Este projeto contém um script interativo escrito em **Shell Script (Bash)** para realizar configurações iniciais em servidores Linux, como **ajuste automático de hostname**, **geração interativa de senha segura para o root** e **integração básica com ferramentas de monitoramento**.
 
 🎯 O objetivo principal é servir como **base de aprendizado para estudantes e iniciantes** em administração de servidores, automação com Bash e boas práticas de provisionamento.
 
@@ -10,63 +10,72 @@ Este projeto contém um script escrito em **Shell Script (Bash)** para realizar 
 
 **Arquivo**: `ajuste-hostname.sh`  
 **Criado por**: [Rarysson](https://github.com/RaryssonPereira)  
-**Objetivo**: Automatizar o ajuste de hostname com base no IP reverso (PTR), reforçar boas práticas de segurança (como senha forte para root) e introduzir integração com ferramentas como Zabbix e APIs externas.
+**Objetivo**: Automatizar o ajuste de hostname com base no DNS reverso (PTR), reforçar boas práticas de segurança (como senha forte para root) e introduzir integração opcional com ferramentas como Zabbix e APIs externas, sempre com interatividade para o usuário.
 
 ---
 
 ## 📌 Funcionalidades
 
-- Detecta automaticamente o **IP público** do servidor  
-- Realiza consulta **DNS reversa (PTR)** para obter o hostname baseado no IP  
-- Ajusta o **hostname do sistema** e arquivos relacionados  
-- Gera uma **senha segura e aleatória** para o usuário root  
-- Salva a nova senha em um diretório interno do sistema  
-- Faz ajustes no agente de monitoramento (**Zabbix**, opcional)  
-- Envia dados para uma **API externa** (trecho opcional e comentável)
+- Detecta automaticamente o **IP público** do servidor.
+- Realiza consulta **DNS reversa (PTR)** para obter automaticamente o hostname baseado no IP.
+- Ajusta interativamente o **hostname do sistema** e arquivos relacionados.
+- Gera uma **senha segura e aleatória** para o usuário root.
+- Permite personalizar o local onde a nova senha será salva.
+- Faz ajustes opcionais no agente de monitoramento **Zabbix**.
+- Oferece opção comentada para envio de dados a uma **API externa** (exemplo didático).
 
 ---
 
 ## ⚙️ Pré-requisitos
 
-- ✅ Sistema operacional Linux com suporte a Bash  
-- ✅ Permissões de root (ou uso do `sudo`)  
-- ✅ Ferramentas instaladas:
+- ✅ Sistema operacional Linux com suporte ao Bash.
+- ✅ Permissões de root (ou uso do `sudo`).
+- ✅ Ferramentas essenciais instaladas:
 
-  - `curl`  
-  - `dig` *(disponível via `dnsutils` ou `bind-utils`)*  
-  - `awk`, `sed`, `tr`, `chpasswd`, `hostname`  
+  - `curl`
+  - `dig` *(disponível via `dnsutils` ou `bind-utils`)*
+  - `awk`, `sed`, `tr`, `chpasswd`, `hostname`
   - *(opcional)* `zabbix-agent`
+
+---
+
+## 📝 Personalizações necessárias
+
+- **Bloco(s) IP do seu servidor** (substitua no script).
+- **Diretório padrão** para armazenamento da senha gerada (opcional).
+- **Dados para integração com API externa** (opcional, comentado).
 
 ---
 
 ## 📂 Arquivos afetados pelo script
 
-- `/etc/hostname`  
-- `/etc/hosts`  
-- `/etc/issue`  
-- `/etc/issue.net`  
-- `/etc/zabbix/zabbix_agentd.conf` *(se existir)*  
-- `/opt/nome-da-empresa/.passwd` *(senha root gerada)*
+- `/etc/hostname`
+- `/etc/hosts`
+- `/etc/issue`
+- `/etc/issue.net`
+- `/etc/zabbix/zabbix_agentd.conf` *(se existir)*
+- Diretório escolhido para armazenamento da senha root.
 
 ---
 
 ## 🚨 Avisos importantes
 
-- O **hostname antigo será sobrescrito**  
-- O **PTR (reverso) do IP precisa estar corretamente configurado**  
-- A **senha do usuário root será alterada automaticamente** e salva localmente  
-- O script **pode ser adaptado** para confirmar alterações críticas  
-- As chamadas de **API externas são didáticas** e devem ser ajustadas para produção
+- O **hostname antigo será sobrescrito** (backup automático realizado antes das alterações).
+- O **DNS reverso (PTR)** precisa estar configurado corretamente para obter o hostname.
+- A **senha do usuário root será alterada automaticamente** e salva no diretório indicado.
+- Todas as ações críticas são realizadas após confirmação do usuário.
+- As chamadas de **API externas são ilustrativas** e devem ser adaptadas para uso real.
 
 ---
 
 ## 🧠 Exemplos de aprendizado
 
-- Automatizar tarefas com comandos Bash  
-- Realizar substituições seguras com `sed`  
-- Gerar senhas fortes com `/dev/urandom`  
-- Manipular arquivos de configuração do sistema  
-- Integrar Shell Script com APIs externas usando `curl`
+- Automatizar tarefas interativas com comandos Bash.
+- Realizar backups antes de mudanças críticas.
+- Gerar senhas seguras automaticamente com `/dev/urandom`.
+- Manipular arquivos de configuração com segurança.
+- Integrar Shell Script com APIs externas utilizando `curl`.
+- Boas práticas de segurança em scripts Linux.
 
 ---
 
@@ -84,11 +93,13 @@ chmod +x ajuste-hostname.sh
 sudo ./ajuste-hostname.sh
 ```
 
+Siga as instruções interativas durante a execução do script.
+
 ---
 
 ## 🧪 Sugestão
 
-> Você pode comentar ou adaptar trechos do script para experimentar diferentes cenários de aprendizado.
+> Experimente comentar ou adaptar trechos do script para entender melhor seu funcionamento e aprender mais sobre Shell Script.
 
 ---
 
@@ -106,11 +117,11 @@ Abra uma **Issue** ou envie um **Pull Request** ✨
 ## 📜 Licença
 
 Distribuído sob a licença **MIT**.  
-Você pode **usar, modificar e compartilhar** como quiser!
+Você pode **usar, modificar e compartilhar** livremente!
 
 ---
 
 ## ✨ Créditos
 
 Criado com carinho por **Rarysson**,  
-pensado para quem está começando e quer aprender Linux de forma prática, útil e automatizada. 🚀
+pensado especialmente para quem está começando e deseja aprender administração Linux e automação de forma prática, interativa e segura! 🚀
